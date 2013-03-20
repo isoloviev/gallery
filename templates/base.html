@@ -1,0 +1,172 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Ivan Solovyev - Official Web Site - Programming, traveling and so on{% endblock %}</title>
+
+    <meta http-equiv="description"
+          content="{% block metaDescription %}Ivan Solovyev - Official Web Site - Programming, traveling and so on{% endblock %}">
+    <meta http-equiv="keywords"
+          content="{% block metaKeywords %}Ivan Solovyev - Official Web Site - Programming, traveling and so on{% endblock %}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{{ STATIC_PREFIX }}bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="{{ STATIC_PREFIX }}bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="{{ STATIC_PREFIX }}style.css" rel="stylesheet">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{{ STATIC_PREFIX }}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_PREFIX }}holder.js"></script>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="{{ STATIC_PREFIX }}/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<!-- NAVBAR
+    ================================================== -->
+<div class="navbar-wrapper">
+    <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+    <div class="container">
+
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="/">Ivan Solovyev</a>
+                <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about/">About</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/photo/">Photos</a></li>
+                        <li><a href="/contacts/">Contact Me</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+            <!-- /.navbar-inner -->
+        </div>
+        <!-- /.navbar -->
+
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.navbar-wrapper -->
+
+{% if current_path == '/' %}
+    <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="{{ STATIC_PREFIX }}header/slide-1.jpg" alt="">
+
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>Example headline.</h1>
+
+                        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non
+                            mi
+                            porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                        <a class="btn btn-large btn-primary" href="#">Sign up today</a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="{{ STATIC_PREFIX }}header/slide-2.jpg" alt="">
+
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>Another example headline.</h1>
+
+                        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non
+                            mi
+                            porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                        <a class="btn btn-large btn-primary" href="#">Learn more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="{{ STATIC_PREFIX }}header/slide-3.jpg" alt="">
+
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>One more for good measure.</h1>
+
+                        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non
+                            mi
+                            porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                        <a class="btn btn-large btn-primary" href="#">Browse gallery</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+    <!-- /.carousel -->
+{% endif %}
+
+<!-- Marketing messaging and featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
+
+<div class="container marketing">
+
+    <div class="featurette">
+
+        {% block content %} No content is defined. {% endblock %}
+
+    </div>
+
+    <hr class="featurette-divider">
+
+    <!-- FOOTER -->
+    <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+
+        <p>&copy; 2013 Ivan Solovyev. All rights reserved.</p>
+    </footer>
+
+</div>
+<!-- /.container -->
+
+<script>
+    !function ($) {
+        $(function () {
+            // carousel demo
+            $('#myCarousel').carousel();
+
+            var isMarkedAsActive = false;
+
+            $('ul.nav li a').each(function (i, r) {
+                r = $(r);
+                var href = document.location.href;
+                if (r.attr('href') != '/' && href.indexOf(r.attr('href')) > -1) {
+                    r.parent().addClass('active');
+                    isMarkedAsActive = true;
+                }
+            });
+
+            // mark home as default
+            if (!isMarkedAsActive) {
+                $('ul.nav li a:first').parent().addClass('active');
+            }
+        })
+    }(window.jQuery)
+</script>
+
+</body>
+</html>
