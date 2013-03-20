@@ -1,4 +1,4 @@
-gallery
+Python + Django Web Site
 =======
 
-Gallery using Yii
+The next try of web site creation using Python and Django.
