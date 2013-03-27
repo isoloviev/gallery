@@ -246,3 +246,37 @@ body {
     }
 
 }
+
+.blog-entry {
+    margin: 25px 0;
+}
+
+.blog-entry:nth-child(1) {
+    margin-top: 0;
+}
+
+.blog-entry h1 {
+    font-size: 130%;
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+
+.blog-entry a {
+    text-decoration: underline;
+}
+
+.blog-entry a:hover {
+    text-decoration: none;
+}
+
+.blog-entry .date {
+    font-size: 70%;
+}
+
+.blog-entry .content {
+    margin: 3px 0 5px;
+}
+
+.blog-entry .controls {
+    font-size: 70%;
+}

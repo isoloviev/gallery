@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a> <span class="divider">/</span></li>
+        <li class="active">Blog</li>
+    </ul>
+
+    <div class="row-fluid">
+
+        <div class="span9">
+
+            {% for item in posts.object_list %}
+
+                <div class="blog-entry" id="post-{{ item.id }}">
+                    <h1><a href="{% url 'blog-details' item.id %}">{{ item.title }}</a></h1>
+
+                    <div class="date">{{ item.pubDate }}</div>
+                    <div class="content">
+                        {{ item.shortContent|safe }}
+                    </div>
+                    <div class="controls">
+                        <div class="pull-right">
+                            <a href="{% url 'blog-details' item.id %}#comments">{{ item.comments.count }} Comments</a> |
+                            <a href="{% url 'blog-details' item.id %}#add-comment">Comment on this</a>
+                        </div>
+                        {% if item.tags.all|length > 0 %}
+                        <div>
+                            Tags:
+                            {% for tag in item.tags.all %}
+                                <a href="{% url 'blog-index' %}tags/{{ tag.name }}"><span class="badge badge-info">{{ tag.name }}</span></a>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+                <hr/>
+
+            {% endfor %}
+
+            {% if posts.paginator.page_range|length > 1 %}
+                <div class="pagination pagination-centered">
+                    <ul>
+                        {% if posts.has_previous %}
+                            <li><a href="{{ posts.previous_page_number }}">&laquo;</a></li>{% endif %}
+                        {% for num in posts.paginator.page_range %}
+                            {% ifequal num posts.number %}
+                                <li class="active"><a href="?page={{ num }}">{{ num }}</a></li>
+                            {% else %}
+                                <li><a href="?page={{ num }}">{{ num }}</a></li>
+                            {% endifequal %}
+                        {% endfor %}
+                        {% if posts.has_next %}
+                            <li><a href="#">&raquo;</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            {% endif %}
+
+
+        </div>
+
+        <div class="well span3" style="padding: 8px 0;">
+
+            <ul class="nav nav-list">
+                <li class="nav-header">Page Summary</li>
+                {% for item in posts.object_list %}
+                    <li><a href="#post-{{ item.id }}">{{ item.title }} <span
+                            class="badge">{% if item.comments.count > 0 %}
+                        {{ item.comments.count }}{% endif %}</span></a></li>
+                {% endfor %}
+                <li class="nav-header">Tags</li>
+                {% for item in tags %}
+                    <li><a href="{% url 'blog-index' %}tags/{{ item.name }}/">{{ item.name }} <span
+                            class="badge">{% if item.cnt > 0 %}{{ item.cnt }}{% endif %}</span></a></li>
+                {% endfor %}
+            </ul>
+
+        </div>
+
+    </div>
+
+{% endblock %}
