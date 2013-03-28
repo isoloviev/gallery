@@ -9,4 +9,48 @@
 
     <p>If you want to contact me, please fill up the form below.</p>
 
+    <h1>Contact Form</h1>
+    <form action="" method="post" class="form-horizontal">
+        {{ form.non_field_errors }}
+        {% csrf_token %}
+        <div class="control-group {{ form.name.errors|yesno:'error,' }}">
+            <label class="control-label" for="id_name">Name:</label>
+
+            <div class="controls">
+                <input id="id_name" name="{{ form.name.html_name }}" class="span8" type="text" placeholder="Your name…">
+                {% if form.name.errors %}
+                    <span class="help-inline">{{ form.name.errors.0|escape }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="control-group {{ form.email.errors|yesno:'error,' }}">
+            <label class="control-label" for="id_email">Email:</label>
+
+            <div class="controls">
+                <input id="id_email" name="{{ form.email.html_name }}"  class="span8" type="text" placeholder="example@gmail.com">
+                {% if form.email.errors %}
+                    <span class="help-inline">{{ form.email.errors.0|escape }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="control-group {{ form.message.errors|yesno:'error,' }}">
+            <label class="control-label" for="id_message">Message:</label>
+
+            <div class="controls">
+                <textarea id="id_message" name="{{ form.message.html_name }}"  class="span8" name="" rows="8"></textarea>
+                {% if form.message.errors %}
+                    <span class="help-inline">{{ form.message.errors.0|escape }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <div class="pull-right">
+                <button type="submit" class="btn btn-primary">Send Message &raquo;</button>
+            </div>
+        </div>
+    </form>
+
 {% endblock %}
